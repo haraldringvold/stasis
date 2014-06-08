@@ -18,7 +18,7 @@ end
 
 # Activate the [Tilt][ti] gem.
 
-gem "tilt", "1.3.3"
+gem "tilt", "1.4.1"
 
 # Add the project directory to the load paths.
 
@@ -48,7 +48,7 @@ require 'stasis/plugins/render'
 ### Public Interface
 
 class Stasis
-  
+
   # `Action` -- changes with each iteration of the main loop within `Stasis#render`.
   attr_accessor :action
 
@@ -75,14 +75,14 @@ class Stasis
 
   # `String` -- the root path passed to `Stasis.new`.
   attr_accessor :root
-  
+
   # `String` -- the view output from Tilt.
   attr_accessor :output
-  
+
   def initialize(root, *args)
     @options = {}
     @options = args.pop if args.last.is_a?(::Hash)
-    
+
     @root = File.expand_path(root)
     @destination = args[0] || @root + '/public'
     @destination = File.expand_path(@destination, @root)
@@ -152,7 +152,7 @@ class Stasis
       # Remove old generated files.
       FileUtils.rm_rf(destination)
     end
-    
+
     # Trigger all plugin `before_all` events.
     trigger(:before_all)
 
@@ -187,7 +187,7 @@ class Stasis
 
       # Change current working directory.
       Dir.chdir(File.dirname(@path))
-      
+
       # Trigger all plugin `before_render` events.
       trigger(:before_render)
 
@@ -224,10 +224,10 @@ class Stasis
         elsif @action._render
           @action._render
         end
-      
+
       # Set @output instance variable for manipulation from within plugins
       @output = view
-      
+
       # Trigger all plugin `after_render` events.
       trigger(:after_render)
 
